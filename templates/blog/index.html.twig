@@ -1,8 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur mon blog{% endblock %}
+{% block title %}Accueil | {{ parent() }}{% endblock %}
 
-{% block body %}
-<h1>Hello World</h1>
-<h2>Bienvenue sur mon blog !</h2>
+{% block content %}
+  <div class="container py-3">
+    <section class="row g-3">
+      <article class="col-12 col-md-6 col-lg-3">
+        <div class="card shadow-sm">
+          <img src="https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><a href="#">Card title</a></h5>
+            <span>06/07/2022</span>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </div>
 {% endblock %}

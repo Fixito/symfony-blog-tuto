@@ -1,0 +1,22 @@
+.card {
+  transition: all 0.3s linear;
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.image-container {
+  max-width: 950px;
+  margin-top: 0.5rem;
+}
+
+.categories {
+  display: inline-block;
+  margin: 1rem 0;
+}
+
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+}
