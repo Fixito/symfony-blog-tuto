@@ -1,21 +1,20 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{{ slug }} | {{ parent() }}{% endblock %}
+{% block title %}{{ article.title }} | {{ parent() }}{% endblock %}
 
 {% block content %}
   <article class="container">
     <div class="row">
       <div class="col-12">
-        <h2>{{ slug }}</h2>
-        <span>06/07/2022</span>
+        <h2>{{ article.title }}</h2>
+        <span>{{ article.publicationDate|date('d/m/Y') }}</span>
         <div class="image-container">
-          <img src="https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="..." class="img-fluid">
+          <img src="{{ asset('uploads/' ~ article.picture) }}" class="img-fluid">
         </div>
-      <span class="categories">php, html, css</span>
+      <span class="categories">{% for category in article.categories %} {{ category.label }}{{ loop.last ? '' : ',' }} {% endfor %}</span>
       </div>
     </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor officiis numquam excepturi quis. Error labore beatae aperiam dolore rem commodi molestiae expedita? Optio labore consequuntur, saepe eveniet dignissimos rem possimus porro at veniam libero accusamus dicta asperiores est iste similique iure reprehenderit ex culpa. Repellendus id ipsam, saepe aut iste ratione facere obcaecati impedit doloremque veritatis at corporis velit cum eos repudiandae nobis nisi qui dolorem eius praesentium. Ratione sit, eaque minima architecto dolorem ab ducimus ipsa illo laborum ipsum quam! At, explicabo. Fugiat at totam accusantium officia debitis? Ipsam aperiam obcaecati, temporibus id enim totam asperiores deleniti suscipit ipsa?</p>
-      <p>At libero voluptatum enim. Non aut rem magnam accusantium hic iusto dolor, vel temporibus sed facere deserunt possimus! Consequuntur illo perferendis voluptatibus dolor iure quibusdam totam expedita asperiores nobis, aliquam alias saepe perspiciatis accusantium, recusandae sunt maiores. Ut quae omnis vel cumque laboriosam, modi unde nisi repellendus saepe tempora fugiat asperiores beatae mollitia soluta maiores. Accusantium eligendi ad harum est facilis iste beatae. Ex id laboriosam placeat labore molestias accusantium facere consequuntur laudantium distinctio ullam fuga voluptatem repellendus natus, provident unde quo. Repellendus libero aliquid obcaecati voluptatum sint, quae qui veritatis animi nihil aspernatur tempora atque, ea debitis doloribus laboriosam!</p>
+      <p>{{ article.content }}</p>
     </div>
   </article>
 {% endblock %}

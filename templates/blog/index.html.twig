@@ -5,16 +5,17 @@
 {% block content %}
   <div class="container py-3">
     <section class="row g-3">
+    {% for article in articles %}
       <article class="col-12 col-md-6 col-lg-3">
         <div class="card shadow-sm">
-          <img src="https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="card-img-top" alt="...">
+          <img src="{{ asset("uploads/" ~ article.picture) }}" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title"><a href="#">Card title</a></h5>
-            <span>06/07/2022</span>
+            <h5 class="card-title"><a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a></h5>
+            <span>{{ article.publicationDate|date('d/m/Y') }}</span>
           </div>
         </div>
       </article>
-
+    {% endfor %}
     </section>
   </div>
 {% endblock %}
