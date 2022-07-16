@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -30,6 +32,8 @@ class BlogController extends AbstractController
   #[Route('/add', name: 'article_add')]
   public function add(Request $request, ManagerRegistry $doctrine): Response
   {
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
     $article = new Article();
     $form = $this->createForm(ArticleType::class, $article);
     $form->handleRequest($request);
@@ -65,7 +69,7 @@ class BlogController extends AbstractController
       // On exécute la requête
       $em->flush();
 
-      return new Response('L\'article a bien été enregistrer.');
+      return $this->redirectToRoute('admin');
     }
 
     return $this->render('blog/add.html.twig', [
@@ -81,6 +85,7 @@ class BlogController extends AbstractController
     ]);
   }
 
+  #[IsGranted('ROLE_ADMIN')]
   #[Route('/edit/{id}', name: 'article_edit')]
   public function edit($id, ManagerRegistry $doctrine, Article $article, Request $request): Response
   {
@@ -120,7 +125,7 @@ class BlogController extends AbstractController
       $em->persist($article);
       $em->flush();
 
-      return new Response("L'article a bien été modifieé.");
+      return $this->redirectToRoute('admin');
     }
 
     return $this->render("blog/edit.html.twig", [
@@ -130,8 +135,29 @@ class BlogController extends AbstractController
   }
 
   #[Route('/remove/{id}', name: 'article_remove')]
-  public function remove($id): Response
+  public function remove($id, ManagerRegistry $doctrine): Response
   {
-    return new Response("<h1>Supprimer l'Article $id</h1>");
+    $em = $doctrine->getManager();
+    $article = $em->getRepository(Article::class)->find($id);
+    $em->remove($article);
+    $em->flush();
+
+    return $this->redirectToRoute('admin');
+  }
+
+  #[Route('/admin', name: 'admin')]
+  public function admin(ManagerRegistry $doctrine): Response
+  {
+    $articles = $doctrine->getRepository(Article::class)->findBy(
+      [],
+      ["lastUpdateDate" => "DESC"]
+    );
+
+    $users = $doctrine->getRepository(User::class)->findAll();
+
+    return $this->render("admin/index.html.twig", [
+      "articles" => $articles,
+      "users" => $users
+    ]);
   }
 }

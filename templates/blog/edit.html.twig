@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="container pt-3">
-    <h4 class="mb-3">Modifier l'article {{ article.title }}</h4>
+    <h1 class="mb-5">Modifier l'article {{ article.title }}</h1>
       {% if article.picture is not null %}
         <img src="{{ asset('uploads/' ~ article.picture) }}" width="300">
       {% endif %}

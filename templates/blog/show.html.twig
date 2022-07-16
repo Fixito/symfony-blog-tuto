@@ -3,10 +3,10 @@
 {% block title %}{{ article.title }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-  <article class="container">
+  <article class="container py-5">
     <div class="row">
       <div class="col-12">
-        <h2>{{ article.title }}</h2>
+        <h1>{{ article.title }}</h1>
         <span>{{ article.publicationDate|date('d/m/Y') }}</span>
         <div class="image-container">
           <img src="{{ asset('uploads/' ~ article.picture) }}" class="img-fluid">
