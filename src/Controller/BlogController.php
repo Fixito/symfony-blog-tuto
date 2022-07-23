@@ -87,7 +87,7 @@ class BlogController extends AbstractController
 
   #[IsGranted('ROLE_ADMIN')]
   #[Route('/edit/{id}', name: 'article_edit')]
-  public function edit($id, ManagerRegistry $doctrine, Article $article, Request $request): Response
+  public function edit(ManagerRegistry $doctrine, Article $article, Request $request): Response
   {
     $oldPicture = $article->getPicture();
 

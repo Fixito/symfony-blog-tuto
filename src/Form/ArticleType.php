@@ -23,7 +23,7 @@ class ArticleType extends AbstractType
         "required" => false,
         "data_class" => null
       ])
-      ->add('title', TextType::class, ["required" => false])
+      ->add('title', TextType::class)
       ->add('content', TextareaType::class, ["required" => false])
       ->add('isPublished', CheckboxType::class, ["required" => false])
       ->add('categories', EntityType::class, [
