@@ -5,6 +5,11 @@
 {% block content %}
   <div class="container pt-5">
     <div class="row mb-5">
+      {% for message in app.flashes('notice') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+      {% endfor %}
       <div class="col-12">
         <a href="{{ path('article_add') }}" class="btn btn-primary" style="float: right">Ajouter</a>
         <h5>Articles</h5>

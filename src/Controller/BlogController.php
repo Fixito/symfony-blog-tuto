@@ -69,6 +69,11 @@ class BlogController extends AbstractController
       // On exécute la requête
       $em->flush();
 
+      $this->addFlash(
+        "notice",
+        "L'article a bien été ajouté"
+      );
+
       return $this->redirectToRoute('admin');
     }
 
@@ -125,6 +130,11 @@ class BlogController extends AbstractController
       $em->persist($article);
       $em->flush();
 
+      $this->addFlash(
+        "notice",
+        "L'article a bien été modifié"
+      );
+
       return $this->redirectToRoute('admin');
     }
 
@@ -141,6 +151,11 @@ class BlogController extends AbstractController
     $article = $em->getRepository(Article::class)->find($id);
     $em->remove($article);
     $em->flush();
+
+    $this->addFlash(
+      "notice",
+      "L'article a bien été supprimé"
+    );
 
     return $this->redirectToRoute('admin');
   }

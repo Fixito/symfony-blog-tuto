@@ -3,7 +3,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block content %}
-<div class="container py-3">
+<div class="container fixed-width py-3">
   <form method="post">
       {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,7 +15,7 @@
         </div>
       {% endif %}
 
-      <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+      <h4 class="h3 mb-3">Connexion</h4>
       <div class="mb-3">
         <label for="inputEmail">Adresse email</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>

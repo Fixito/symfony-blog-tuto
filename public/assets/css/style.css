@@ -8,7 +8,6 @@
 
 .image-container {
   max-width: 950px;
-  margin-top: 0.5rem;
 }
 
 .categories {
@@ -16,7 +15,7 @@
   margin: 1rem 0;
 }
 
-.form {
+.fixed-width {
   max-width: 600px;
   margin: 0 auto;
 }
